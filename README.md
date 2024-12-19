@@ -4,7 +4,20 @@ A Next.js application that allows loading websites in an iframe and injecting Ja
 
 ## Important Note
 
-This application must be run on the same domain as the target website due to browser security restrictions (Same-Origin Policy)
+1. This application must be run on the same domain as the target website due to browser security restrictions (Same-Site Policy) to ensure session cookies are handled as expected.
+
+2. For script injection to work it's neccessary to load the app with Chromium <https://download-chromium.appspot.com> to disable the browser's Same-Origin policy for accessing the iframe's content. Start Chromium with these flags:
+
+```
+--disable-web-security
+--allow-file-access-from-files
+--disable-site-isolation-trials
+--disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,StrictOriginIsolation,BlockInsecurePrivateNetworkRequests
+```
+
+To start Chromium on MacOS use:
+
+```open -na "Chromium" --args --disable-web-security --user-data-dir=/tmp/chromium --allow-file-access-from-files --disable-site-isolation-trials --disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,StrictOriginIsolation,BlockInsecurePrivateNetworkRequests```
 
 ## Features
 
